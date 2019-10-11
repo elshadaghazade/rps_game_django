@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Authentication</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>{{request.session.first_name}} {{request.session.last_name}}, you are welcome!</h1>
+            <p><a href="{% url 'logout' %}">Log out &gt; &gt;</a></p>
+            <p><a class="btn btn-info" href="{% url 'statistics' %}">Show me my statistics</a></p>
+        </div>
+
+        {% if game_state %}
+            <div class="alert alert-{% if game_state == 'You won!'%}success{% elif game_state == 'Draw' %}warning{% else %}danger{% endif %}">
+                <p>Your choice is: {{user_choice}}</p>
+                <p>Server choice is: {{server_choice}}</p>
+                <strong>{{game_state}}</strong>
+            </div>
+        {% endif %}
+        
+        <form method="post">
+            <div class="button-group ">
+                <button name="user_choice" value="r" class="btn btn-primary form-control">Rock</button>
+                <button name="user_choice" value="p" class="btn btn-danger form-control">Paper</button>
+                <button name="user_choice" value="s" class="btn btn-success form-control">Scissors</button>
+            </div>
+            {% csrf_token %}
+        </form>
+    </div>
+</body>
+</html>

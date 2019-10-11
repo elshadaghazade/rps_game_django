@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Authentication</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Introduce yourself</h1>
+        </div>
+        <form method="POST">
+            <div class="form-group">
+                <label for="first_name">Your first name:</label>
+                <input type="text" value="{{request.session.first_name}}" id="first_name" name="first_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Your last name:</label>
+                <input type="text" value="{{request.session.last_name}}" id="last_name" name="last_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="form-control btn btn-primary">START GAME</button>
+            </div>
+            {% csrf_token %}
+        </form>
+    </div>
+</body>
+</html>
